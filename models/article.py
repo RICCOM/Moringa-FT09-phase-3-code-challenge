@@ -1,3 +1,5 @@
+from database.connection import get_db_connection
+
 class Article:
     def __init__(self, id=None, title=None, content=None, author_id=None, magazine_id=None, author=None, magazine=None):
         self._id = id

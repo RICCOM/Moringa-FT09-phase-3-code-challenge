@@ -1,3 +1,5 @@
+from database.connection import get_db_connection
+
 class Author:
     def __init__(self, id=None, name=None):
         self._id = id
@@ -15,7 +17,7 @@ class Author:
 
     @property
     def id(self):
-            return self._id
+        return self._id
 
     @property
     def name(self):
@@ -28,9 +30,7 @@ class Author:
     def articles(self):
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("""
-            SELECT * FROM articles WHERE author_id = ?
-        """, (self._id,))
+        cursor.execute("SELECT * FROM articles WHERE author_id = ?", (self._id,))
         articles = cursor.fetchall()
         conn.close()
         return [Article(*article) for article in articles]
@@ -49,4 +49,3 @@ class Author:
 
     def __repr__(self):
         return f'<Author {self._name}>'
-
